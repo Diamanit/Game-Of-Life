@@ -201,7 +201,7 @@ class Dragon {
                     matrix[row][col] = new Ash();
                 }
             }
-            this.energy++;
+            this.energy += 5;
 
         } else if(MeatEaterFields.length == 0){
             this.bewegung();
@@ -218,11 +218,11 @@ class Dragon {
 
         this.energy--;
 
-        if (grassFields.length > 0 && this.energy % 10 == 0) {
+        if (grassFields.length > 0 && this.energy % 5 == 0) {
             let randomGrassField = random(grassFields);
             updateCreaturePosition(this, randomGrassField);
     
-        } else if(EmptyFields.length > 0 && this.energy % 10 == 0){
+        } else if(EmptyFields.length > 0 && this.energy % 5 == 0){
             let randomGrassField2 = random(EmptyFields);
             updateCreaturePosition(this, randomGrassField2);
         }
