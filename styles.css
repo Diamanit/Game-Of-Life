@@ -22,6 +22,9 @@ body {
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    position: relative;
+    top: 1300px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
   }
