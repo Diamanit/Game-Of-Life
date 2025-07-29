@@ -4,12 +4,16 @@ class Dragon extends eigenschaften {
     }
 
     step() {
-        let MeatEaterFields = findNeighbourPositions(this.row, this.col, 2, MeatEater);
+        let MeatEaterFields = findNeighbourPositions(this.row, this.col, 5, MeatEater);
+        let grassEaterFields = findNeighbourPositions(this.row, this.col, 2, GrassEater);
 
         if(MeatEaterFields.length > 0) {
             let randomField = random(MeatEaterFields);
             updateCreaturePosition(this, randomField);
-            let Fields = findNeighbourPositions(this.row, this.col, 2, Object);
+            let Fields = findNeighbourPositions(this.row, this.col, 3, Object, function(obj, nRow, row, nCol, col){
+                return nRow-row <= 2 && nCol-col <=2
+                // return Math.sqrt((nRow-row)*(nRow-row)+ (nCol-col)*(nCol-col))<=10
+            });;
             for(let i=0; i<Fields.length; i++){
                 let row = Fields[i][0]
                 let col = Fields[i][1]
@@ -17,9 +21,28 @@ class Dragon extends eigenschaften {
                     matrix[row][col] = new Ash();
                 }
             }
-            this.energy += 5;
+            this.energy += 10;
 
         } else if(MeatEaterFields.length == 0){
+            this.bewegung();
+        }
+
+        if(grassEaterFields.length > 0) {
+            let randomField = random(grassEaterFields);
+            updateCreaturePosition(this, randomField);
+            let Fields = findNeighbourPositions(this.row, this.col, 3, Object, function(obj, nRow, row, nCol, col){
+                return nRow-row <= 2 && nCol-col <=2
+            });
+            for(let i=0; i<Fields.length; i++){
+                let row = Fields[i][0]
+                let col = Fields[i][1]
+                if (!(matrix[row][col] instanceof Empty)){
+                    matrix[row][col] = new Ash();
+                }
+            }
+            this.energy += 10;
+
+        } else if(grassEaterFields.length == 0){
             this.bewegung();
         }
 

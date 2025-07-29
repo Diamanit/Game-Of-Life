@@ -41,13 +41,16 @@ function updateCreaturePosition(creature, newPos) {
     creature.col = newCol;
 }
 
-function findNeighbourPositions(row, col, distance, creatureType) {
+function findNeighbourPositions(row, col, distance, creatureType, filter) {
+    if(filter == undefined){
+        filter = (...args)=>true
+    }
     let positions = [];
     for (let nCol = col - distance; nCol <= col + distance; nCol++) {
         for (let nRow = row - distance; nRow <= row + distance; nRow++) {
             let inMatrix = nCol >= 0 && nCol < matrixSize && nRow >= 0 && nRow < matrixSize;
             let isSamePosition = nCol === col && nRow === row;
-            if (inMatrix && !isSamePosition && matrix[nRow][nCol] instanceof creatureType) {
+            if (inMatrix && !isSamePosition && matrix[nRow][nCol] instanceof creatureType && filter(matrix[nRow][nCol], nRow, row, nCol, col)) {
                 positions.push([nRow, nCol]);
             }
         }
@@ -55,19 +58,43 @@ function findNeighbourPositions(row, col, distance, creatureType) {
     return positions;
 }
 
+let zaehler;
+
 function setup() {
     createCanvas(matrixSize * blockSize, matrixSize * blockSize);
     fillRandomMatrix();
     noStroke();
     frameRate(30);
     addEventListeners();
-}
+    grassInHTML = document.getElementById("grass");
+    grassEaterInHTML = document.getElementById("grasseater");
+    meatEaterInHTML = document.getElementById("meateater");
+    dragonInHTML = document.getElementById("dragon");
+}    
+
+let grassInHTML;
+let grassEaterInHTML;
+let meatEaterInHTML;
+let dragonInHTML;
 
 function draw() {
+    zaehler = {
+        "grass": 0,
+        "grasseater": 0,
+        "meateater": 0,
+        "dragon": 0
+    }
+
     background(200)
     for (let row = 0; row < matrixSize; row++) {
         for (let col = 0; col < matrixSize; col++) {
             let obj = matrix[row][col];
+
+            if (obj instanceof Grass) zaehler.grass += 1;
+            if (obj instanceof GrassEater) zaehler.grasseater += 1;
+            if (obj instanceof MeatEater) zaehler.meateater += 1;
+            if (obj instanceof Dragon) zaehler.dragon += 1;
+
 
             if (obj instanceof Empty) continue;
 
@@ -89,13 +116,18 @@ function draw() {
             }
         }
     }
+
+    grassInHTML.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;Grass - gr&uuml;n " + zaehler.grass;
+    grassEaterInHTML.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;Grassfresser - gelb " + zaehler.grasseater;
+    meatEaterInHTML.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;Fleischfresser - rot " + zaehler.meateater;
+    dragonInHTML.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;Drachen - weinrot " + zaehler.dragon;
+    // console.log(zähler);
+
 }
 
 function addEventListeners(){
 
     let restartBotton = document.images;
-    
-    console.log(restartBotton);
     
     for(let i = 0; i < restartBotton.length; i++){
         restartBotton[i].addEventListener("mouseover", function(){
@@ -109,6 +141,14 @@ function addEventListeners(){
         restartBotton[i].addEventListener("click", function(){
             fillRandomMatrix();
             frameRate(30);
+        });
+
+        restartBotton[i].addEventListener("mousedown", function(){
+            restartBotton[i].style.backgroundColor = "#252525";
+        });
+
+        restartBotton[i].addEventListener("mouseup", function(){
+            restartBotton[i].style.backgroundColor = "#363636";
         });
     }
 }

@@ -1,8 +1,8 @@
 body {
     display: flex;
     justify-content: center;
+    height: 2300;
     background-color: #363636;
-
   }
 
   div {
@@ -18,13 +18,15 @@ body {
   p {
     position: relative;
     left: 50px;
-    font-size: 200%;
+    font-size: 300%;
   }
 
   img {
     position: relative;
     top: 1300px;
+    left: 40%;
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    box-shadow: #1b1b1b 10px 10px 20px;
   }
