@@ -23,10 +23,44 @@ body {
 
   img {
     position: relative;
-    top: 1300px;
-    left: 40%;
     width: 200px;
     height: 200px;
     border-radius: 50%;
     box-shadow: #1b1b1b 10px 10px 20px;
+
+  }
+
+  .restartButton {
+    top: 1300px;
+    left: 40%;
+
+  }
+
+  .blitzButton, .dragonSpawn, .jahresZeitButton {
+    width: 150px;
+    height: 150px;
+    top: -40px; 
+    left: -15%;
+    border:10px solid #1b1b1b;
+  }
+
+  .blitzButton {
+    left: -15%;
+    background-color: rgb(0, 217, 255);   
+  }
+
+  .dragonSpawn {
+    left: 0%;
+    background-color: rgb(150, 0, 0);  
+  }
+
+  .jahresZeitButton {
+    left: 20%;
+    background-color: rgb(136, 136, 136);
+  }
+
+
+  .chart {
+    min-width: 400;
+    min-height: 200;
   }

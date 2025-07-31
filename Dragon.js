@@ -1,6 +1,6 @@
 class Dragon extends eigenschaften {
     constructor() {
-        super("#922121", 1000);
+        super(["#922121", "rgb(0, 204, 204)"], 1000);
     }
 
     step() {
@@ -26,26 +26,6 @@ class Dragon extends eigenschaften {
         } else if(MeatEaterFields.length == 0){
             this.bewegung();
         }
-
-        if(grassEaterFields.length > 0) {
-            let randomField = random(grassEaterFields);
-            updateCreaturePosition(this, randomField);
-            let Fields = findNeighbourPositions(this.row, this.col, 3, Object, function(obj, nRow, row, nCol, col){
-                return nRow-row <= 2 && nCol-col <=2
-            });
-            for(let i=0; i<Fields.length; i++){
-                let row = Fields[i][0]
-                let col = Fields[i][1]
-                if (!(matrix[row][col] instanceof Empty)){
-                    matrix[row][col] = new Ash();
-                }
-            }
-            this.energy += 10;
-
-        } else if(grassEaterFields.length == 0){
-            this.bewegung();
-        }
-
         this.death();
     }
 

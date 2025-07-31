@@ -1,12 +1,12 @@
 class Grass extends eigenschaften{
     constructor() {
-        super("green", int(random(0, 3)));
+        super(["green", "rgb(230, 230, 230)"], int(random(0, 3)));
     }
 
     step() {
         this.energy++;
 
-        if (this.energy >= 7) {
+        if (this.energy >= grassEnergy) {
             this.multiply();
             this.energy = 0;
         }

@@ -1,6 +1,6 @@
 class GrassEater extends eigenschaften {
     constructor() {
-        super("yellow", 5);
+        super(["yellow", "#CC6600"], 5);
     }
 
     step() {
@@ -21,7 +21,7 @@ class GrassEater extends eigenschaften {
 
         }
 
-        if(this.energy == 10){
+        if(this.energy == grassEaterEnergy){
             this.multiply();
         }
         
@@ -36,7 +36,7 @@ class GrassEater extends eigenschaften {
             let row = randomEmptyField[0];
             let col = randomEmptyField[1];
             matrix[row][col] = new GrassEater();
-            this.energy -= 5;
+            this.energy -= (grassEaterEnergy / 2);
 
         }
     }

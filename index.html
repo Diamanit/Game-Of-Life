@@ -1,6 +1,9 @@
 <html>
 
 <head>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.min.js"></script>
   <script src="eigenschaften.js"></script>
   <script src="Grass.js"></script>
@@ -8,11 +11,12 @@
   <script src="MeatEater.js"></script>
   <script src="Ash.js"></script>
   <script src="Dragon.js"></script>
+  <script src="lightning.js"></script>
   <script src="GOL.js"></script>
-
-
+  
+  
   <link rel="stylesheet" href="styles.css">
-
+  
 </head>
 
 <body>
@@ -22,11 +26,21 @@
     <p id="grasseater"></p>
     <p id="meateater"></p>
     <p id="dragon"></p>
-    <img src="neustart.png">
+    <img class="restartButton" src="neustart.png">
+    <img class="blitzButton" src="252590.png">
+    <img class="dragonSpawn" src="Download-removebg-preview.png">
+    <img class="jahresZeitButton" src="2411812.png">
+    
     <main></main>
-
+    
+    <div class="chart">
+      <canvas id="myChart"></canvas>
+    </div>
+    
   </div>
-
+  
+  
+  <script src="chart.js"></script>  
 </body>
 
 </html>

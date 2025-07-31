@@ -1,0 +1,3 @@
+hund {
+    constructor()
+}

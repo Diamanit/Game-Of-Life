@@ -1,9 +1,9 @@
 class Empty { }
 
 class eigenschaften{
-    constructor(color, energy) {
+    constructor(colorList, energy) {
         this.stepCount = frameCount + 1;
-        this.color = color;
+        this.color = colorList;
         this.energy = energy;
     }
 
